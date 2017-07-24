@@ -40,6 +40,7 @@ function reset_vars () {
 
 function parse_data (data) {
   let output = '';
+  reset_vars();
 
   for (let i = 0; i < data.length; ++i) {
     let theLetter = data[i];
