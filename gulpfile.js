@@ -1,15 +1,31 @@
 'use strict';
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
+const gulp = require('gulp-npm-run')(require('gulp'));
+const gclean = require('gulp-clean');
+const run = require('gulp-run');
+const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 
 
-gulp.task('serve', () => {
+gulp.task('clean', () => {
+  return gulp.src('web/bundle.js', {read: false})
+     .pipe(gclean());
+});
 
-  browserSync.init({
-    server: './'
+
+gulp.task('serve', () => {
+  
+  browserSync({
+    server: {
+      baseDir: './',
+      port: 3005
+    }
   });
 
-  //gulp.watch('./**/*', reload);
+  gulp.watch(['text-correction-parser.js', 'index.html'], refreshing);
+  
 });
+
+function refreshing () {
+  new run.Command('npm run build').exec('test');
+}
