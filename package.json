@@ -1,0 +1,28 @@
+{
+  "name": "text-correction-parser",
+  "version": "1.0.0",
+  "description": "correction parser for inline text",
+  "main": "text-correction-parser.js",
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdegenne/text-correction-parser.git"
+  },
+  "keywords": [
+    "parser"
+  ],
+  "author": "Valentin Degenne <vdegenne@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vdegenne/text-correction-parser/issues"
+  },
+  "homepage": "https://github.com/vdegenne/text-correction-parser#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "webpack": "^3.3.0"
+  }
+}
