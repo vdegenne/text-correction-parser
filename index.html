@@ -1,102 +1,86 @@
 <!doctype html>
 <html>
 <head>
-    <script src="web/bundle.js"></script>
 
-    <link rel="import" href="https://polygit.org/polymer+:master/components/iron-flex-layout/iron-flex-layout.html">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    
+    <title>text correction parser</title>
+
+    <script src=./text-correction-parser.js></script>
 </head>
 <body>
 
 <style>
-    div[role=article] {
-        display: -ms-flexbox; display: -webkit-flex; display: flex;
-        -ms-flex-direction: column; -webkit-flex-direction: column; flex-direction: column;
-        -ms-flex-align: center; -webkit-align-items: center; align-items: center;
-
-        padding: 20px 0 0 0;
-    }
-    div[role=article] > * {
-        margin: 0;
-        width: 700px;
-        font-size: 0.9em;
-        font-family: Monaco, "Fira Code Retina", Inconsolata, Consolas, Monospaced;
-    }
-    div[role=article] > *:not(.arrow) {
-        border: 1px solid grey;
-        padding: 10px;
-        border-radius: 3px;
-        overflow-x: auto;
-    }
-    textarea {
-        min-height: 100px;
-    }
-    .arrow {
-        display: inline-block;
-        text-align: center;
-        font-size: 2em;
-        font-weight: 900;
-        margin: 10px 0 !important;
-    }
-    .added {
-        color: #3068c3;
-    }
-
-    .removed {
-        color: #ee0f16;
-        text-decoration: line-through;
-    }
-
-    .wrong_replace {
-        color: #ee0f16;
-        text-decoration: line-through;
-    }
-    .right_replace {
-        color: #00bf00;
-    }
+  body {
+    font-family: arial;
+  }
+  section {
+    max-width: 500px;
+    margin: 10px auto;
+    padding: 0 20px;
+  }
+  textarea, pre, div {
+    border: 1px solid #616161;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+    margin: 0;
+    font-family: arial;
+    font-size: .89rem;
+  }
+  textarea {
+    min-height: 100px;
+  }
+  p {
+    margin-bottom: 0;
+  }
 </style>
+<section>
 
-<div role="article">
+<p>input</p>
 <textarea id="input">
 this is a test for @added@.
 this is a test for >removed<.
 this is a test for [rplc>replacement]
 </textarea>
-
-<span class="arrow">↓↓↓</span>
-
+    
+<!-- <span class="arrow">↓↓↓</span> -->
+<p>parsed (pre)</p>
 <pre id="pre"></pre>
 
-<span class="arrow">↓↓↓</span>
-
+<!-- <span class="arrow">↓↓↓</span> -->
+<p>formatted output</p>
 <div id="output"></div>
-</div>
 
-<script>
-  (function () {
-    'use strict';
-
-    let input = document.querySelector('#input');
-    let pre = document.querySelector('#pre');
-    let output = document.querySelector('#output');
-
-    function parseText () {
-      pre.innerText = TextCorrectionParser.parse_data(input.value);
-      output.innerHTML = nl2br(TextCorrectionParser.parse_data(input.value));
-    }
-
-    document.querySelector('#input').addEventListener('keyup', () => {
+  </section>
+  
+  <script>
+    (function () {
+      'use strict';
+      
+      function parseText () {
+        pre.innerText = TextCorrectionParser.parse(input.value);
+        output.innerHTML = nl2br(TextCorrectionParser.parse(input.value));
+      }
+      
+      input.addEventListener('keyup', () => {
+        parseText();
+      });
+      
+      
+      function nl2br (str, is_xhtml) {
+        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+      }
+      
+      
       parseText();
-    });
-
-
-    function nl2br (str, is_xhtml) {
-      var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
-      return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-    }
-
-
-    parseText();
-  })();
-</script>
+    })();
+  </script>
 </body>
 </html>

@@ -22,11 +22,6 @@
   "homepage": "https://github.com/vdegenne/text-correction-parser#readme",
   "devDependencies": {
     "browser-sync": "^2.18.13",
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-npm-run": "0.0.3",
-    "gulp-run": "^1.7.1",
-    "superstatic": "^4.1.0",
-    "webpack": "^3.3.0"
+    "gulp": "^3.9.1"
   }
 }

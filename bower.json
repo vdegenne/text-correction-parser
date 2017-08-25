@@ -1,0 +1,24 @@
+{
+  "name": "text-correction-parser",
+  "description": "correction parser for inline text",
+  "main": "index.html",
+  "authors": [
+    "Valentin Degenne <vdegenne@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "parser"
+  ],
+  "homepage": "https://github.com/vdegenne/text-correction-parser",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    ".",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^2.0.2"
+  }
+}
