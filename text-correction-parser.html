@@ -55,7 +55,10 @@
 
     static get properties() { return {
 
-      data: String,
+      data: {
+        type: String,
+        value: ''
+      },
 
       nl2br: {
         type: Boolean,
