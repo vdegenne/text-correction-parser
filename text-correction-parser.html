@@ -13,18 +13,35 @@
 
       #parsed > .added {
         color: var(--added-color, #1e88e5);
-        @apply --added-mixins;
-      }
-      #parsed > .deleted,
-      #parsed > .left-wrong-replaced,
-      #parsed > .right-wrong-replaced {
-        color: var(--deleted-color, rgba(211, 47, 47, .4));
-        text-decoration: line-through;
+        @apply --added;
       }
 
-      #parsed > .left-right-replaced,
+      #parsed > .deleted {
+        color: var(--deleted-color, rgba(211, 47, 47, .4));
+        text-decoration: line-through;
+        @apply --deleted;
+      }
+
+      #parsed > .left-wrong-replaced {
+        color: var(--left-wrong-replaced-color, rgba(211, 47, 47, .4));
+        text-decoration: line-through;
+        @apply --left-wrong-replaced;
+      }
+
+      #parsed > .right-wrong-replaced {
+        color: var(--right-wrong-replaced-color, rgba(211, 47, 47, .4));
+        text-decoration: line-through;
+        @apply --right-wrong-replaced;
+      }
+
+      #parsed > .left-right-replaced {
+        color: var(--left-right-replaced-color, #1b5e20);
+        @apply --left-right-replaced;
+      }
+
       #parsed > .right-right-replaced {
-        color: var(--deleted-color, #1b5e20);
+        color: var(--right-right-replaced-color, #1b5e20);
+        @apply --right-right-replaced;
       }
     </style>
 
@@ -38,19 +55,36 @@
 
     static get properties() { return {
 
-      data: {
-        type: String,
-        observer: '_dataChanged'
+      data: String,
+
+      nl2br: {
+        type: Boolean,
+        value: true
       }
     }}
+
+    static get observers() { return [
+      '_parse(data, nl2br)'
+    ]}
 
     constructor() {
       super();
       this.textCorrectionParser = new window.TextCorrectionParser();
     }
 
-    _dataChanged() {
-      this.$.parsed.innerHTML = this.textCorrectionParser.parse(this.data);
+    _parse() {
+      if (this.nl2br) {
+        this.$.parsed.innerHTML = this.nl2brFn(this.textCorrectionParser.parse(this.data));
+      }
+      else {
+        this.$.parsed.innerHTML = this.textCorrectionParser.parse(this.data);
+      }
+
+    }
+
+    nl2brFn (str, is_xhtml) {
+      var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+      return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 
   }
