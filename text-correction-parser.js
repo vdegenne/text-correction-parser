@@ -1,39 +1,40 @@
 (function () {
   'use strict';
 
-  const enclosers = [{
-    name: 'left-wrong-replaced',
-    opening : '[r]',
-    closing: '>>',
-    template: '<span class="left-wrong-replaced">%</span>'
-  },{
-    name: 'right-right-replaced',
-    opening: '>>',
-    closing: '[/r]',
-    template: '<span class="right-right-replaced">%</span>'
-  },{
-    name: 'left-right-replaced',
-    opening : '[r]',
-    closing: '<<',
-    template: '<span class="left-right-replaced">%</span>'
-  },{
-    name: 'right-wrong-replaced',
-    opening: '<<',
-    closing: '[/r]',
-    template: '<span class="right-wrong-replaced">%</span>'
-  },{
-    name: 'deleted',
-    opening: '[d]',
-    closing: '[/d]',
-    template: '<span class="deleted">%</span>'
-  },{
-    name: 'added',
-    opening: '[a]',
-    closing: '[/a]',
-    template: '<span class="added">%</span>'
-  }];
+  const enclosers = [
+      {
+        name: 'left-wrong-replaced',
+        opening : '[r]',
+        closing: '>>',
+        template: '<span class="left-wrong-replaced">%</span>'
+      },{
+        name: 'right-right-replaced',
+        opening: '>>',
+        closing: '[/r]',
+        template: '<span class="right-right-replaced">%</span>'
+      },{
+        name: 'left-right-replaced',
+        opening : '[r]',
+        closing: '<<',
+        template: '<span class="left-right-replaced">%</span>'
+      },{
+        name: 'right-wrong-replaced',
+        opening: '<<',
+        closing: '[/r]',
+        template: '<span class="right-wrong-replaced">%</span>'
+      },{
+        name: 'deleted',
+        opening: '[d]',
+        closing: '[/d]',
+        template: '<span class="deleted">%</span>'
+      },{
+        name: 'added',
+        opening: '[a]',
+        closing: '[/a]',
+        template: '<span class="added">%</span>'
+      }
 
-
+    ];
 
   class TextCorrectionParser {
 
@@ -167,6 +168,6 @@
     }
   }
 
-
+  TextCorrectionParser.enclosers = enclosers;
   window.TextCorrectionParser = TextCorrectionParser;
 })();
