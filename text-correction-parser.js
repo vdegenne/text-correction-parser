@@ -169,5 +169,13 @@
   }
 
   TextCorrectionParser.enclosers = enclosers;
+
+  /* Map */
+  let enclosersMap = {};
+  for (let e of enclosers) {
+    enclosersMap[e.name] = e;
+  }
+  TextCorrectionParser.enclosersMap = enclosersMap;
+
   window.TextCorrectionParser = TextCorrectionParser;
 })();
