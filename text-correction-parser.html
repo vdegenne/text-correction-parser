@@ -76,6 +76,10 @@
     }
 
     _parse() {
+      if (this.data === null) {
+        return;
+      }
+
       if (this.nl2br) {
         this.$.parsed.innerHTML = this.nl2brFn(this.textCorrectionParser.parse(this.data));
       }
